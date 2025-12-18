@@ -59,11 +59,23 @@ class UVM:
                     print(f"ОШИБКА: Адрес {addr} вне памяти")
             else:
                 print("ОШИБКА: Стек пуст при WRITE")
-        elif op == 47:  # abs (заглушка для этапа 3)
-            print("КОМАНДА abs ЕЩЁ НЕ РЕАЛИЗОВАНА (будет в этапе 3)")
-            # Пропускаем команду, но снимаем со стека адрес
+        elif op == 47:  # abs (РЕАЛИЗОВАНО В ЭТАПЕ 3)
+            offset = (word >> 6) & 0x7F  # 7 бит смещения
             if self.stack:
-                self.stack.pop()
+                addr = self.stack.pop()
+                eff_addr = addr + offset
+                if 0 <= eff_addr < len(self.memory):
+                    # Читаем значение как знаковое 8-битное
+                    value = self.memory[eff_addr]
+                    if value > 127:  # отрицательное в дополнении до двух
+                        value = value - 256
+                    abs_value = abs(value)
+                    self.stack.append(abs_value)
+                    print(f"ABS addr={addr}+{offset}={eff_addr}, value={value}, abs={abs_value}, stack={self.stack}")
+                else:
+                    print(f"ОШИБКА: Адрес {eff_addr} вне памяти")
+            else:
+                print("ОШИБКА: Стек пуст при ABS")
         else:
             print(f"ОШИБКА: Неизвестный код операции {op}")
 
