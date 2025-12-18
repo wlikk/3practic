@@ -1,0 +1,4 @@
+load, 100
+read, 200
+write, 300
+abs, 10
