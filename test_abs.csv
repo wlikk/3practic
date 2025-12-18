@@ -1,0 +1,26 @@
+# Test abs() command
+# Write test values (including negative)
+load, 500
+load, 251
+write, 0
+
+load, 501
+load, 10
+write, 0
+
+load, 502
+load, 241
+write, 0
+
+# Calculate absolute values
+load, 500
+abs, 0
+write, 600
+
+load, 501
+abs, 0
+write, 601
+
+load, 502
+abs, 0
+write, 602
