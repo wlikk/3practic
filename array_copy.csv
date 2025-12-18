@@ -1,0 +1,28 @@
+# Заполняем массив в адресах 1000..1004
+load, 10
+write, 1000
+load, 20
+write, 1001
+load, 30
+write, 1002
+load, 40
+write, 1003
+load, 50
+write, 1004
+
+# Копируем в адреса 2000..2004
+load, 1000
+read, 0
+write, 2000
+load, 1001
+read, 0
+write, 2001
+load, 1002
+read, 0
+write, 2002
+load, 1003
+read, 0
+write, 2003
+load, 1004
+read, 0
+write, 2004
